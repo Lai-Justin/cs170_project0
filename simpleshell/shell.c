@@ -130,7 +130,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
     /*Exit if seeing "exit" command*/
     /*Your solution*/
     if (*nextChar == "exit"){
-      exit(0)
+      exit(0);
     }
             
     if (*nextChar == '<' && inPipe == 0) 
