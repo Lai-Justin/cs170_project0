@@ -123,7 +123,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
   char * args[length];
   char * nextChar = parse(linePtr, args);
 
-  puts(nextChar);
+  // puts(nextChar);
 
   if (args[0] != NULL)
   {
