@@ -86,7 +86,7 @@ void fchild(char **args,int inPipe, int outPipe)
     if (*args[0] == '<')
     {
       printf('ran 1');
-      dup2(0, inPipe);
+      dup2(inPipe, 0);
     }
 
     else if (*args[0] == '>')
@@ -156,7 +156,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
-      dup2(inPipe, in);
+      dup2(inPipe, *in);
 
       fchild(args,inPipe,outPipe);
     }
