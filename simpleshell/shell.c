@@ -86,7 +86,7 @@ void fchild(char **args,int inPipe, int outPipe)
     if (*args[0] == '<')
     {
       printf('ran 1');
-      dup2(inPipe, 0);
+      dup2(0, inPipe);
     }
 
     else if (*args[0] == '>')
