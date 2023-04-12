@@ -150,7 +150,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       // copy file descripter to inPipe
       dup2(inPipe, fd);
       // not sure what length should be
-      runcmd(in, length ,inPipe, outPipe);
+      runcmd(nextChar, length ,inPipe, outPipe);
     }
 
     if (*nextChar == '>')
