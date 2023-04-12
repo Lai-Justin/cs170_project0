@@ -152,28 +152,12 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       close(fd);
       // not sure what length should be
       runcmd(nextChar, sizeof(nextChar) ,inPipe, outPipe);
+      return
     }
 
     if (*nextChar == '>')
     {   /*It is output redirection, setup the file name to write*/
         /*Your solutuon*/
-
-          //It is input redirection, setup the file name to read from
-      char * out[length];
-      
-      //nextChar+1 moves the character position after <,
-      //thus points to a file name
-      nextChar = parse(nextChar+1,out); 
-
-      /* Change inPipe so it follows the redirection */ 
-      /*Your solutuon*/
-      // open file
-      int fd = open(out, O_CREAT|O_TRUNC|O_WRONLY,0644);
-      // copy file descripter to inPipe
-      dup2(outPipe, fd);
-      close(fd);
-      // not sure what length should be
-      runcmd(nextChar, sizeof(nextChar) ,inPipe, outPipe);
           
     }
 
