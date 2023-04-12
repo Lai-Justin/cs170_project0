@@ -156,7 +156,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
-      dup2(inPipe, in)
+      dup2(inPipe, in);
     }
 
     if (*nextChar == '>')
