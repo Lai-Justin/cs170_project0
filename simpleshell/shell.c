@@ -152,7 +152,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       close(fd);
       // not sure what length should be
       runcmd(nextChar, sizeof(nextChar) ,inPipe, outPipe);
-      return
+      return;
     }
 
     if (*nextChar == '>')
