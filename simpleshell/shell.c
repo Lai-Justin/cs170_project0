@@ -83,6 +83,16 @@ void fchild(char **args,int inPipe, int outPipe)
 
     /*Your solution*/
 
+    if (args[0] == '<')
+    {
+      dup2(inPipe, 0)
+    }
+
+    else if (args[0] == '>')
+    {
+      dup2(outPipe, 1)
+    }
+
     if (execReturn < 0) 
     { 
       printf("ERROR: exec failed\n");
