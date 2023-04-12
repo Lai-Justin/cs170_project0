@@ -149,8 +149,9 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       int fd = open(in, O_CREAT|O_TRUNC|O_WRONLY,0644);
       // copy file descripter to inPipe
       dup2(inPipe, fd);
+      close(fd);
       // not sure what length should be
-      runcmd(nextChar, length ,inPipe, outPipe);
+      runcmd(nextChar, sizeof(nextChar) ,inPipe, outPipe);
     }
 
     if (*nextChar == '>')
