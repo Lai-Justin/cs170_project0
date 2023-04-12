@@ -82,18 +82,7 @@ void fchild(char **args,int inPipe, int outPipe)
     /*Call dup2 to setup redirection, and then call excevep*/
 
     /*Your solution*/
-
-    if (*args[0] == '<')
-    {
-      printf('ran 1');
-      dup2(inPipe, 0);
-    }
-
-    else if (*args[0] == '>')
-    {
-      printf('ran');
-      dup2(outPipe, 1);
-    }
+    if (inPipe )
 
     if (execReturn < 0) 
     { 
@@ -156,9 +145,12 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
-      dup2(inPipe, *in);
-
-      fchild(args,inPipe,outPipe);
+      // open file
+      fd = open(in, O_CREAT|O_TRUNC|O_WRONLY,0644)
+      // copy file descripter to inPipe
+      dup2(inPipe, fd);
+      // not sure what length should be
+      runcmd(in, length ,inPipe, outPipe)
     }
 
     if (*nextChar == '>')
