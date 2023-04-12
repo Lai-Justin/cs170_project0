@@ -146,7 +146,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
       // open file
-      fd = open(in, O_CREAT|O_TRUNC|O_WRONLY,0644);
+      int fd = open(in, O_CREAT|O_TRUNC|O_WRONLY,0644);
       // copy file descripter to inPipe
       dup2(inPipe, fd);
       // not sure what length should be
