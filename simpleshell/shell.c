@@ -85,13 +85,13 @@ void fchild(char **args,int inPipe, int outPipe)
 
     if (*args[0] == '<')
     {
-      printf('ran 1')
+      printf('ran 1');
       dup2(inPipe, 0);
     }
 
     else if (*args[0] == '>')
     {
-      printf('ran')
+      printf('ran');
       dup2(outPipe, 1);
     }
 
