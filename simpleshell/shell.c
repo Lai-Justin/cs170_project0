@@ -146,6 +146,7 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
+      close(inPipe);
       inPipe = open(*in, O_RDONLY);
 
     }
@@ -158,8 +159,8 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
         //nextChar+1 moves the character position after <,
         //thus points to a file name
         nextChar = parse(nextChar+1,in); 
-
-        outPipe = open(*in, O_WRONLY|O_CREAT, 0666);          
+        close(outPipe);
+        outPipe = open(*in, O_WRONLY|O_TRUNC|O_CREAT, 0644);          
     }
 
     if (*nextChar == '|')
