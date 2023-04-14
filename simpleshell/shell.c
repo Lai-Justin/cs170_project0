@@ -83,7 +83,6 @@ void fchild(char **args,int inPipe, int outPipe)
 
     /*Your solution*/
     execvp(args[0], args[1]);
-    // if (inPipe )
 
     if (execReturn < 0) 
     { 
