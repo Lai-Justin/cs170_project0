@@ -167,6 +167,13 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
     { /*It is a pipe, setup the input and output descriptors */
       /*execute the subcommand that has been parsed, but setup the output using this pipe*/
       /*Your solution*/
+      char * in[length];
+      int fd[2];
+      pipe(fd);
+      nextChar = parse(nextChar+1,in); 
+      fchild(in, inPipe, fd[1]);
+      runcmd(nextChar, length, fd[0], outPipe);
+
       /*execute the remaining subcommands, but setup the input using this pipe*/
       /*Your solution*/
 
