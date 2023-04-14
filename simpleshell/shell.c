@@ -83,7 +83,7 @@ void fchild(char **args,int inPipe, int outPipe)
     dup2(outPipe,1);
     dup2(inPipe,0);
     execvp(args[0], args);
-    perror(*args[0]);
+    // perror(*args[0]);
     /*Your solution*/
 
     if (execReturn < 0) 
@@ -132,9 +132,8 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
   {
     /*Exit if seeing "exit" command*/
     /*Your solution*/
-    if (*nextChar == "exit"){
-      exit(0);
-    }
+    if (strcmp(args[0], "exit") == 0)
+        exit(0);
             
     if (*nextChar == '<' && inPipe == 0) 
     {
