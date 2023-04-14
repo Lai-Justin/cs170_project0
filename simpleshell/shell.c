@@ -80,7 +80,10 @@ void fchild(char **args,int inPipe, int outPipe)
     int execReturn=-1;
 
     /*Call dup2 to setup redirection, and then call excevep*/
-
+    dup2(outPipe,1);
+    dup2(inPipe,0);
+    execvp(args[0], args);
+    perror(*args[0]);
     /*Your solution*/
 
     if (execReturn < 0) 
@@ -144,13 +147,20 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
+      inPipe = open(*in, O_RDONLY);
 
     }
 
     if (*nextChar == '>')
     {   /*It is output redirection, setup the file name to write*/
         /*Your solutuon*/
-          
+        char * in[length];
+        
+        //nextChar+1 moves the character position after <,
+        //thus points to a file name
+        nextChar = parse(nextChar+1,in); 
+
+        outPipe = open(*in, O_WRONLY|O_CREAT, 0666);          
     }
 
     if (*nextChar == '|')
@@ -202,6 +212,7 @@ int main(int argc, char *argv[])
   
     /*Wait for the child completes */
     /*Your solution*/
+    while (wait(NULL) > 0);
 
   }
 
