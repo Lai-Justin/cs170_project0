@@ -82,7 +82,7 @@ void fchild(char **args,int inPipe, int outPipe)
     /*Call dup2 to setup redirection, and then call excevep*/
 
     /*Your solution*/
-    execvp(command, args);
+    execvp(args[0], args[1]);
     // if (inPipe )
 
     if (execReturn < 0) 
