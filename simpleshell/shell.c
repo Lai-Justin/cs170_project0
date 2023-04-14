@@ -170,9 +170,8 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       char * in[length];
       int fd[2];
       pipe(fd);
-      nextChar = parse(nextChar+1,in); 
-      fchild(in, inPipe, fd[1]);
-      runcmd(nextChar, length, fd[0], outPipe);
+      fchild(args, inPipe, fd[1]);
+      runcmd(nextChar+1, length - (nextChar - linePtr), fd[0], outPipe);
 
       /*execute the remaining subcommands, but setup the input using this pipe*/
       /*Your solution*/
