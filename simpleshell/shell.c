@@ -80,11 +80,12 @@ void fchild(char **args,int inPipe, int outPipe)
     int execReturn=-1;
 
     /*Call dup2 to setup redirection, and then call excevep*/
+
+    /*Your solution*/
     dup2(outPipe,1);
     dup2(inPipe,0);
     execvp(args[0], args);
     // perror(*args[0]);
-    /*Your solution*/
 
     if (execReturn < 0) 
     { 
@@ -126,8 +127,6 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
   char * args[length];
   char * nextChar = parse(linePtr, args);
 
-  // puts(nextChar);
-
   if (args[0] != NULL)
   {
     /*Exit if seeing "exit" command*/
@@ -146,7 +145,6 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
 
       /* Change inPipe so it follows the redirection */ 
       /*Your solutuon*/
-      close(inPipe);
       inPipe = open(*in, O_RDONLY);
 
     }
@@ -159,7 +157,6 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
         //nextChar+1 moves the character position after <,
         //thus points to a file name
         nextChar = parse(nextChar+1,in); 
-        close(outPipe);
         outPipe = open(*in, O_WRONLY|O_TRUNC|O_CREAT, 0644);          
     }
 
@@ -170,10 +167,10 @@ void runcmd(char * linePtr, int length, int inPipe, int outPipe)
       int fd[2];
       pipe(fd);
       fchild(args, inPipe, fd[1]);
-      runcmd(nextChar+1, length - (nextChar - linePtr), fd[0], outPipe);
-
+      
       /*execute the remaining subcommands, but setup the input using this pipe*/
       /*Your solution*/
+      runcmd(nextChar+1, length - (nextChar - linePtr), fd[0], outPipe);
 
       return;
     }
